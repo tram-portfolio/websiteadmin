@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV - Lê Trần Bảo Trâm (Website Admin)</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cvBg: '#FAF8F5',
+            navy: {
+              DEFAULT: '#0B2240',
+              light: '#16355E',
+              dark: '#07162B'
+            },
+            accentGold: '#B8860B',
+            goldText: '#B38136',
+            bodyDark: '#2D3748',
+            cardBg: '#F3EFEA',
+            borderCream: '#E5DEC9'
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #2D3748;
+    }
+
+    /* Standard A4 Aspect Ratio container */
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background-color: #FAF8F5;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      padding: 10mm 12mm;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* Print settings for PDF export */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+        margin: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .a4-page {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        box-shadow: none;
+        padding: 8mm 10mm;
+        page-break-after: always;
+      }
+    }
+
+    /* Custom scrollbar for web view */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="py-6 px-4">
+
+  <!-- A4 CV Canvas Container -->
+  <div class="a4-page flex flex-col justify-between">
+    <div>
+      
+      <!-- HEADER SECTION -->
+      <header class="flex items-center gap-6 pb-4 mb-4 border-b border-borderCream">
+        <!-- Profile Picture with Frame -->
+        <div class="relative flex-shrink-0">
+          <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-navy p-1 bg-white shadow-sm">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300" 
+                 alt="Le Tran Bao Tram" 
+                 class="w-full h-full object-cover rounded-full">
+          </div>
+        </div>
+
+        <!-- Name & Title & Contact Info -->
+        <div class="flex-grow pt-1">
+          <h1 class="font-serif text-3xl tracking-wider font-bold text-navy uppercase leading-tight">
+            LE TRAN BAO TRAM
+          </h1>
+          <p class="text-[11px] font-semibold tracking-widest text-goldText uppercase mt-0.5 mb-2.5">
+            WEBSITE ADMINISTRATOR | CONTENT & SEO | ONLINE BOOKING
+          </p>
+
+          <!-- Contact Details Grid & QR Code -->
+          <div class="flex justify-between items-end">
+            <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[10.5px] text-bodyDark">
+              <div class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8.5px]"><i class="fa-solid fa-phone"></i></span>
+                <span>0906 516 326</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8.5px]"><i class="fa-solid fa-envelope"></i></span>
+                <span>tramltb.942@gmail.com</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8.5px]"><i class="fa-solid fa-location-dot"></i></span>
+                <span>Da Nang, Vietnam</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8.5px]"><i class="fa-brands fa-linkedin-in"></i></span>
+                <span>linkedin.com/in/tram-emma/</span>
+              </div>
+              <div class="flex items-center gap-2 col-span-2">
+                <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8.5px]"><i class="fa-solid fa-globe"></i></span>
+                <span>https://tram-portfolio.github.io/websiteadmin/</span>
+              </div>
+            </div>
+
+            <!-- QR Code Section -->
+            <div class="flex flex-col items-center">
+              <div class="p-1 bg-white border border-slate-300 rounded shadow-xs">
+                <svg class="w-10 h-10" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="100" height="100" fill="white"/>
+                  <path fill="#0B2240" d="M0 0h35v35H0zM5 5v25h25V5zm5 5h15v15H10zM65 0h35v35H65zM70 5v25h25V5zm5 5h15v15H75zM0 65h35v35H0zM5 70v25h25V70zm5 5h15v15H10zM40 10h15v10H40zM40 25h10v10H40zM55 20h10v15H55zM40 40h10v10H40zM20 40h15v10H20zM60 40h10v15H60zM75 40h20v10H75zM85 55h15v10H85zM40 60h10v15H40zM55 60h20v10H55zM40 80h15v15H40zM60 75h10v20H60zM75 75h20v20H75zM85 65h10v10H85z"/>
+                </svg>
+              </div>
+              <span class="text-[8px] text-slate-500 font-medium mt-0.5">Portfolio QR</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- FULL-WIDTH PROFESSIONAL SUMMARY -->
+      <section class="mb-4">
+        <h2 class="font-serif text-sm tracking-wider font-bold text-navy uppercase border-b-2 border-navy/20 pb-1 mb-2">
+          PROFESSIONAL SUMMARY
+        </h2>
+        <p class="text-[11px] text-bodyDark leading-relaxed text-justify">
+          Marketing professional with nearly 3 years of hands-on experience managing website content, SEO and digital presentation for service-booking and multi-brand websites. Experienced in updating content, visuals and promotions via CMS, designing banners in Canva, applying on-page SEO, and coordinating with partners and technical teams. Detail-oriented, with a strong sense of aesthetics and a focus on accurate information, working independently and on schedule.
+        </p>
+      </section>
+
+      <!-- TWO COLUMN LAYOUT CONTENT -->
+      <div class="grid grid-cols-12 gap-6 mb-4">
+        
+        <!-- LEFT COLUMN: PROFESSIONAL EXPERIENCE (60% Width - 7 cols) -->
+        <div class="col-span-7 pr-1 flex flex-col justify-between">
+          <section class="h-full flex flex-col justify-between">
+            <h2 class="font-serif text-sm tracking-wider font-bold text-navy uppercase border-b-2 border-navy/20 pb-1 mb-3">
+              PROFESSIONAL EXPERIENCE
+            </h2>
+
+            <!-- Job 1 -->
+            <div class="mb-3.5">
+              <div class="flex justify-between items-baseline mb-0.5">
+                <h3 class="font-bold text-navy text-[12px]">HERBAL SPA & WELLNESS CENTER</h3>
+                <span class="text-[10.5px] font-semibold text-slate-600">08/2025 – Present</span>
+              </div>
+              <p class="text-[11px] italic font-semibold text-goldText mb-1">Marketing Lead | Website • Content • SEO • Branding</p>
+              <ul class="list-disc list-outside pl-4 text-[10.5px] text-bodyDark space-y-1.5 leading-relaxed">
+ <li>
+    Managed the website and integrated online booking system for a spa business with 5 branches, overseeing service information, pricing, promotions and CMS updates, supporting 1,500 website bookings per month.
+  </li>
+  <li>
+    Contributed to website redesign and new website implementation, optimizing UI/UX to improve navigation, user experience and booking convenience, contributing to a 25% increase in upselling.
+  </li>
+  <li>
+    Wrote and edited website content, SEO articles and PR articles; coordinated media bookings and publications, while optimizing on-page SEO elements and local SEO for individual branches.
+  </li>
+  <li>
+    Tested website functions end to end, including search, booking flows, contact forms and links; coordinated with the development team to resolve issues and verify fixes.
+  </li>
+  <li>
+    Created visual assets for website pages, PR publications and marketing campaigns using Canva and AI tools; tracked website traffic and bookings through Google Analytics and Looker Studio.
+  </li>
+</ul>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="mb-3.5">
+              <div class="flex justify-between items-baseline mb-0.5">
+                <h3 class="font-bold text-navy text-[12px]">TOS (TopOnSeek) Agency</h3>
+                <span class="text-[10.5px] font-semibold text-slate-600">01/2024 – 07/2025</span>
+              </div>
+              <p class="text-[11px] italic font-semibold text-goldText mb-1">SEO Content Specialist</p>
+              <ul class="list-disc list-outside pl-4 text-[10.5px] text-bodyDark space-y-1.5 leading-relaxed">
+<li>Managed website content across multiple brand websites via CMS, including product pages, articles and other landing pages, ensuring accurate content, images and links.</li>
+<li>Built demo and campaign pages based on client briefs.</li>
+<li>Proposed website UI/UX and CRO improvements to enhance usability and conversion potential.</li>
+<li>Published SEO content and optimized on-page elements, including titles, meta descriptions, keywords, internal links and images.</li>
+<li>Supported SEO campaigns that generated 1M+ clicks and 20M impressions over one year.</li>
+<li>Audited website content and technical issues, coordinated with client teams to resolve problems, and monitored keyword rankings.</li>
+</ul>
+            </div>
+
+            <!-- Job 3 -->
+            <div>
+              <div class="flex justify-between items-baseline mb-0.5">
+                <h3 class="font-bold text-navy text-[12px]">BAOVIET Holdings</h3>
+                <span class="text-[10.5px] font-semibold text-slate-600">06/2023 – 09/2023</span>
+              </div>
+              <p class="text-[11px] italic font-semibold text-goldText mb-1">Marketing & Events Intern</p>
+              <ul class="list-disc list-outside pl-4 text-[10.5px] text-bodyDark space-y-1 leading-relaxed">
+<li>Posted and updated content and images on the company website and Facebook page.</li>
+                <li>Prepared and organized content materials for Facebook and website posts accurately and on schedule.</li>
+                <li>Supported company events with invitations, logistics and on-site assistance, and kept event documentation and records accurate.</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        <!-- RIGHT COLUMN: SKILLS, EDU, CERTS, LANGUAGES (40% Width - 5 cols) WITH LEFT DIVIDER -->
+        <div class="col-span-5 pl-4 border-l border-borderCream flex flex-col justify-between space-y-3">
+          
+          <!-- 1. CORE COMPETENCIES -->
+          <section>
+            <h2 class="font-serif text-sm tracking-wider font-bold text-navy uppercase border-b-2 border-navy/20 pb-1 mb-2">
+              CORE COMPETENCIES
+            </h2>
+            <div class="space-y-1.5 text-[10.5px] text-bodyDark">
+<div class="flex items-center gap-2">
+  <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8px] flex-shrink-0"><i class="fa-solid fa-globe"></i></span>
+  <span class="font-medium">Website Content Management (CMS)</span>
+</div>
+<div class="flex items-center gap-2">
+  <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8px] flex-shrink-0"><i class="fa-solid fa-magnifying-glass-chart"></i></span>
+  <span class="font-medium">On-page & Local SEO</span>
+</div>
+<div class="flex items-center gap-2">
+  <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8px] flex-shrink-0"><i class="fa-solid fa-image"></i></span>
+  <span class="font-medium">Image Editing & Banner Design</span>
+</div>
+<div class="flex items-center gap-2">
+  <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8px] flex-shrink-0"><i class="fa-solid fa-pen-nib"></i></span>
+  <span class="font-medium">Content Editing & Presentation</span>
+</div>
+<div class="flex items-center gap-2">
+  <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8px] flex-shrink-0"><i class="fa-solid fa-clipboard-check"></i></span>
+  <span class="font-medium">Website Testing & Issue Reporting</span>
+</div>
+<div class="flex items-center gap-2">
+  <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8px] flex-shrink-0"><i class="fa-solid fa-handshake"></i></span>
+  <span class="font-medium">Coordination with Technical Teams</span>
+</div>
+<div class="flex items-center gap-2">
+  <span class="w-4 h-4 rounded-full bg-navy text-white flex items-center justify-center text-[8px] flex-shrink-0"><i class="fa-solid fa-chart-pie"></i></span>
+  <span class="font-medium">Website Performance Tracking</span>
+</div>
+            </div>
+          </section>
+
+          <!-- 2. KEY SKILLS -->
+          <section>
+            <h2 class="font-serif text-sm tracking-wider font-bold text-navy uppercase border-b-2 border-navy/20 pb-1 mb-1.5">
+              KEY SKILLS
+            </h2>
+<ul class="space-y-1 text-[10.5px] text-bodyDark leading-relaxed">
+  <li><strong class="text-navy">Website &amp; CMS:</strong> Content publishing, price and promotion updates, image and link checks.</li>
+  <li><strong class="text-navy">Booking &amp; Testing:</strong> Search, booking flows, contact forms, issue reporting and fix verification.</li>
+  <li><strong class="text-navy">Content &amp; Design:</strong> Content editing, image retouching, basic banner design; Canva, CapCut.</li>
+  <li><strong class="text-navy">SEO:</strong> Title tags, meta descriptions, URLs, keyword optimization, internal linking, image optimization and local SEO.</li>
+  <li><strong class="text-navy">Analytics:</strong> Google Analytics, Looker Studio.</li>
+  <li><strong class="text-navy">Collaboration:</strong> Development-team coordination, task follow-up and deadline management.</li>
+</ul>
+          </section>
+
+          <!-- 3. EDUCATION -->
+          <section>
+            <h2 class="font-serif text-sm tracking-wider font-bold text-navy uppercase border-b-2 border-navy/20 pb-1 mb-1.5">
+              EDUCATION
+            </h2>
+            <div class="text-[10.5px] text-bodyDark">
+              <h3 class="font-bold text-navy text-[11px]">University of Economics – Da Nang</h3>
+              <p class="text-slate-600 text-[10px]">Bachelor of Business Administration (Marketing)</p>
+              <div class="flex justify-between font-semibold text-slate-600 text-[10px] mt-0.5">
+                <span>2020 – 2024</span>
+                <span>GPA: 3.34 / 4.0</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. CERTIFICATIONS -->
+          <section>
+            <h2 class="font-serif text-sm tracking-wider font-bold text-navy uppercase border-b-2 border-navy/20 pb-1 mb-1.5">
+              CERTIFICATIONS
+            </h2>
+            <ul class="list-disc pl-3.5 text-[10.5px] text-bodyDark space-y-0.5">
+              <li>SEO Training – VinhLink Academy</li>
+              <li>Content & Digital Marketing – HubSpot</li>
+              <li>Brand Marketing – Tomorrow Together</li>
+              <li>PR & Communication Skills – AIM Academy</li>
+            </ul>
+          </section>
+
+          <!-- 5. LANGUAGES -->
+          <section>
+            <h2 class="font-serif text-sm tracking-wider font-bold text-navy uppercase border-b-2 border-navy/20 pb-1 mb-1">
+              LANGUAGES
+            </h2>
+            <ul class="list-disc pl-3.5 text-[10.5px] text-bodyDark space-y-0.5">
+              <li>English – Intermediate (B1)</li>
+              <li>Chinese – Elementary (HSK 1)</li>
+            </ul>
+          </section>
+
+        </div>
+      </div>
+
+   <!-- KEY PROJECTS -->
+<section class="pt-2 border-t border-borderCream">
+  <h2 class="font-serif text-sm tracking-wider font-bold text-navy uppercase border-b-2 border-navy/20 pb-1 mb-2.5">
+    KEY PROJECTS
+    <span class="text-[10px] font-normal text-slate-500">
+      (SEE PORTFOLIO FOR DETAILS)
+    </span>
+  </h2>
+
+  <div class="grid grid-cols-3 gap-3">
+
+    <!-- Herbal Spa -->
+    <div class="bg-[#F4EFEA]/90 border border-[#E8DFC0] rounded-lg p-2.5 flex items-center gap-2">
+      <span class="w-7 h-7 rounded bg-navy text-white flex items-center justify-center text-xs flex-shrink-0">
+        <i class="fa-solid fa-spa"></i>
+      </span>
+      <div class="min-w-0">
+        <h4 class="font-bold text-[10px] text-navy uppercase leading-tight">
+          HERBAL SPA
+        </h4>
+        <p class="text-[9px] text-bodyDark leading-snug">
+          herbalspa.vn
+        </p>
+      </div>
+    </div>
+
+    <!-- Come Home -->
+    <div class="bg-[#F4EFEA]/90 border border-[#E8DFC0] rounded-lg p-2.5 flex items-center gap-2">
+      <span class="w-7 h-7 rounded bg-navy text-white flex items-center justify-center text-xs flex-shrink-0">
+        <i class="fa-solid fa-house"></i>
+      </span>
+      <div class="min-w-0">
+        <h4 class="font-bold text-[10px] text-navy uppercase leading-tight">
+          COME HOME
+        </h4>
+        <p class="text-[9px] text-bodyDark leading-snug">
+          comehome.com.vn
+        </p>
+      </div>
+    </div>
+
+    <!-- Vinh Tuong -->
+    <div class="bg-[#F4EFEA]/90 border border-[#E8DFC0] rounded-lg p-2.5 flex items-center gap-2">
+      <span class="w-7 h-7 rounded bg-navy text-white flex items-center justify-center text-xs flex-shrink-0">
+        <i class="fa-solid fa-building"></i>
+      </span>
+      <div class="min-w-0">
+        <h4 class="font-bold text-[10px] text-navy uppercase leading-tight">
+          VĨNH TƯỜNG
+        </h4>
+        <p class="text-[9px] text-bodyDark leading-snug">
+        vinhtuong.com
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    </div>
+  </div>
+
+</body>
+</html>
