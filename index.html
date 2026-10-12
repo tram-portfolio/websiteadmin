@@ -1,0 +1,928 @@
+<!DOCTYPE html> 
+<html lang="vi" class="scroll-smooth"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Le Tran Bao Tram | Website Administrator Portfolio</title> 
+<!-- Tailwind CSS CDN --> 
+<script src="https://cdn.tailwindcss.com"></script> 
+<!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans --> 
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"> 
+<!-- Font Awesome Icons --> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+<!-- Tailwind Custom Colors Configuration --> 
+<script> 
+tailwind.config = { 
+  theme: { 
+    extend: { 
+      colors: { 
+        brandBg: '#FAF8F5', 
+        brandCard: '#F3EFEA', 
+        brandBorder: '#E5DEC9', 
+        navy: { DEFAULT: '#0B2240', light: '#16355E', dark: '#07162B' }, 
+        gold: { DEFAULT: '#B8860B', accent: '#D4AF37', dark: '#8B6508', light: '#F4E8C1' }, 
+        bodyDark: '#2D3748' 
+      }, 
+      fontFamily: { 
+        serif: ['Cormorant Garamond', 'Georgia', 'serif'], 
+        sans: ['Plus Jakarta Sans', 'sans-serif'] 
+      } 
+    } 
+  } 
+} 
+</script> 
+<!-- Custom Styles --> 
+<style> 
+body { background-color: #FAF8F5; color: #2D3748; font-family: 'Plus Jakarta Sans', sans-serif; } 
+.gold-gradient-text { background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #8B6508 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } 
+.navy-gradient-bg { background: linear-gradient(135deg, #0B2240 0%, #16355E 100%); } 
+/* Custom Scrollbar */ 
+::-webkit-scrollbar { width: 8px; } 
+::-webkit-scrollbar-track { background: #FAF8F5; } 
+::-webkit-scrollbar-thumb { background: #0B2240; border-radius: 4px; } 
+::-webkit-scrollbar-thumb:hover { background: #B8860B; } 
+
+/* CASE STUDY MODAL */
+.case-modal {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 30px; background: rgba(10, 15, 25, 0.72); backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.case-modal.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.case-modal-inner {
+  position: relative; width: min(100%, 1000px); max-height: 90vh;
+  overflow-y: auto; background: #fff; border-radius: 4px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px); transition: transform 0.35s ease;
+}
+.case-modal.is-open .case-modal-inner { transform: translateY(0); }
+.case-modal-close {
+  position: sticky; top: 20px; float: right; z-index: 10;
+  width: 42px; height: 42px; margin: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95); font-size: 24px; line-height: 1; cursor: pointer;
+}
+.case-modal-close:hover { background: #f5f5f5; }
+
+@media (max-width: 768px) {
+  .case-modal { padding: 15px; }
+  .case-modal-inner { max-height: 94vh; }
+  .case-modal-close { margin: 12px; }
+}
+
+/* FEATURED WORK STYLES */
+.featured-work { padding: 100px 24px; background: #f8f7f4; color: #182536; }
+.featured-container { max-width: 1200px; margin: 0 auto; }
+.featured-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 50px; margin-bottom: 45px; }
+.featured-eyebrow { display: block; margin-bottom: 12px; color: #a58b5c; font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.featured-header h2 { margin: 0; font-family: Georgia, serif; font-size: clamp(38px, 5vw, 58px); line-height: 1; font-weight: 500; letter-spacing: -.035em; }
+.featured-header p { max-width: 390px; margin: 0; color: #72777c; font-size: 14px; line-height: 1.8; }
+.featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.featured-card { overflow: hidden; background: #fff; border: 1px solid #e4e1da; transition: transform .3s ease, box-shadow .3s ease; cursor: pointer; }
+.featured-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(24,37,54,.08); }
+.featured-image { position: relative; height: 300px; overflow: hidden; }
+.featured-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .6s ease; }
+.featured-card:hover .featured-image img { transform: scale(1.04); }
+.image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0) 55%); }
+.case-number { position: absolute; top: 18px; left: 20px; color: #fff; font-size: 10px; letter-spacing: .16em; text-shadow: 0 1px 8px rgba(0,0,0,.25); }
+.case-category { position: absolute; left: 20px; bottom: 18px; color: #fff; font-size: 9px; font-weight: 600; letter-spacing: .13em; text-shadow: 0 1px 8px rgba(0,0,0,.25); }
+.client-images { position: relative; display: grid; grid-template-rows: 1fr 1fr; height: 300px; overflow: hidden; }
+.client-image { position: relative; overflow: hidden; }
+.client-image + .client-image { border-top: 1px solid rgba(255,255,255,.7); }
+.client-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .6s ease; }
+.featured-card:hover .client-image img { transform: scale(1.04); }
+.client-name { position: absolute; left: 20px; bottom: 18px; color: #fff; z-index: 2; text-shadow: 0 1px 8px rgba(0,0,0,.3); }
+.client-name span { display: block; margin-bottom: 4px; font-size: 8px; letter-spacing: .15em; font-weight: 600; }
+.client-name strong { display: block; font-family: Georgia, serif; font-size: 25px; font-weight: 500; letter-spacing: -.02em; }
+.featured-info { padding: 25px 25px 27px; }
+.info-label { display: block; margin-bottom: 10px; color: #a58b5c; font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.featured-info h3 { margin: 0; font-family: Georgia, serif; font-size: 25px; font-weight: 500; line-height: 1.2; letter-spacing: -.02em; }
+.featured-meta { display: flex; margin-top: 23px; padding-top: 18px; border-top: 1px solid #ece9e2; }
+.featured-meta small { display: block; margin-bottom: 6px; color: #999; font-size: 8px; letter-spacing: .14em; }
+.featured-meta strong { display: block; font-size: 11px; font-weight: 600; line-height: 1.4; }
+
+@media (max-width: 900px) {
+  .featured-grid { grid-template-columns: 1fr; }
+  .featured-header { display: block; }
+  .featured-header p { margin-top: 20px; }
+}
+@media (max-width: 600px) {
+  .featured-work { padding: 70px 18px; }
+  .featured-header h2 { font-size: 42px; }
+  .featured-image, .client-images { height: 300px; }
+}
+</style> 
+</head> 
+<body class="antialiased selection:bg-gold/20 selection:text-navy" id="top"> 
+
+  <!-- NAVIGATION BAR --> 
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-brandBg/90 backdrop-blur-md border-b border-brandBorder/50 py-4"> 
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between"> 
+      <!-- Logo --> 
+      <a href="#" class="flex items-center gap-2.5 group"> 
+        <div class="w-10 h-10 rounded-full bg-navy text-gold-accent flex items-center justify-center font-serif text-xl font-bold group-hover:scale-105 transition-transform shadow-md border border-gold/30"> T </div> 
+        <div class="flex flex-col"> 
+          <span class="font-serif text-lg font-bold tracking-wider text-navy uppercase leading-none">LE TRAN BAO TRAM</span> 
+          <span class="text-[9px] font-semibold text-gold tracking-widest uppercase mt-1">Website Administrator</span> 
+        </div> 
+      </a> 
+      <!-- Desktop Nav Links --> 
+      <nav class="hidden md:flex items-center space-x-7 text-xs font-semibold text-bodyDark uppercase tracking-wider"> 
+        <a href="#projects" class="hover:text-gold transition-colors">Web Projects</a> 
+        <a href="#experience" class="hover:text-gold transition-colors">Experience</a> 
+        <a href="#skills" class="hover:text-gold transition-colors">Skills & Certs</a> 
+        <a href="#about" class="hover:text-gold transition-colors">About</a> 
+        <a href="#contact" class="px-5 py-2.5 rounded-full bg-navy text-white hover:bg-gold hover:text-navy transition-all duration-300 shadow-md font-bold text-xs uppercase tracking-wider border border-navy hover:border-gold"> Get In Touch </a> 
+      </nav> 
+      <!-- Mobile Menu Button --> 
+      <button id="mobile-menu-btn" class="md:hidden text-navy focus:outline-none p-2" aria-label="Toggle Menu"> 
+        <i class="fa-solid fa-bars text-2xl"></i> 
+      </button> 
+    </div> 
+    <!-- Mobile Dropdown Navigation --> 
+    <div id="mobile-menu" class="hidden md:hidden bg-brandBg border-b border-brandBorder px-6 pt-3 pb-6 space-y-3 mt-3 shadow-2xl text-xs font-bold uppercase tracking-wider"> 
+      <a href="#skills" class="block text-bodyDark hover:text-gold py-2 border-b border-brandBorder/40">Skills & Certifications</a> 
+      <a href="#about" class="block text-bodyDark hover:text-gold py-2 border-b border-brandBorder/40">About Me</a> 
+      <a href="#experience" class="block text-bodyDark hover:text-gold py-2 border-b border-brandBorder/40">Experience</a> 
+      <a href="#projects" class="block text-bodyDark hover:text-gold py-2 border-b border-brandBorder/40">Key Web Projects</a> 
+      <a href="#contact" class="block w-full text-center py-3 rounded-full bg-navy text-white font-bold text-xs uppercase tracking-wider mt-3 shadow-md"> Get In Touch </a> 
+    </div> 
+  </header>
+
+  <!-- HERO -->
+  <section class="relative min-h-[86vh] flex items-center overflow-hidden bg-brandBg">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[350px] h-[350px] bg-navy/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto w-full px-5 sm:px-8 lg:px-12 pt-28 pb-20 lg:pt-32 lg:pb-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        <!-- LEFT — PORTRAIT -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-start">
+          <div class="relative group">
+            <div class="absolute -top-4 -left-4 w-full h-full border border-gold/50 rounded-[1.5rem]"></div>
+            <div class="relative w-[270px] h-[360px] sm:w-[310px] sm:h-[410px] lg:w-[360px] lg:h-[475px] overflow-hidden rounded-[1.5rem] bg-white shadow-2xl">
+              <img src="2d63e490-eaef-486c-89bc-994e6a1458bf.jfif" alt="Le Tran Bao Tram — Website Administrator" class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out">
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/20 via-transparent to-transparent"></div>
+            </div>
+            <div class="absolute -bottom-7 -right-5 font-serif italic text-6xl text-gold/30 pointer-events-none">01</div>
+          </div>
+        </div>
+
+        <!-- RIGHT — INTRO -->
+        <div class="lg:col-span-7">
+          <p class="text-xs sm:text-sm font-bold tracking-[0.22em] uppercase text-navy mb-5">LE TRAN BAO TRAM</p>
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-[5.2rem] font-bold text-navy leading-[0.92] tracking-tight">Website Administrator</h1>
+          <p class="mt-5 text-sm sm:text-base tracking-wide text-bodyDark">Website Content Management · On-Page & Local SEO · UI/UX & Testing · Tech Coordination</p>
+          <div class="mt-9 flex flex-wrap gap-4">
+            <a href="#contact" class="group inline-flex items-center px-8 py-4 bg-navy text-white rounded-full text-[10px] font-bold tracking-[0.18em] uppercase shadow-lg hover:bg-gold hover:text-navy transition-all duration-300">
+              Let’s Connect
+              <i class="fa-solid fa-arrow-right ml-3 text-[9px] group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://tram-portfolio.github.io/websiteadmin/" target="_blank" class="inline-flex items-center px-8 py-4 bg-white border border-brandBorder text-navy rounded-full text-[10px] font-bold tracking-[0.18em] uppercase shadow-sm hover:border-gold hover:text-gold transition-all duration-300">
+              <i class="fa-solid fa-globe mr-2"></i> Live Website Admin Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT STRIP -->
+  <section class="bg-navy text-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+        <div class="text-center px-4">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-gold-accent">1,500+</div>
+          <div class="mt-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-slate-300">Monthly Website Bookings</div>
+        </div>
+        <div class="text-center px-4">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-gold-accent">1M+</div>
+          <div class="mt-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-slate-300">Organic Clicks Supported</div>
+        </div>
+        <div class="text-center px-4 mt-4 md:mt-0">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-gold-accent">5+</div>
+          <div class="mt-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-slate-300">Websites Managed</div>
+        </div>
+        <div class="text-center px-4 mt-4 md:mt-0">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-gold-accent">+25%</div>
+          <div class="mt-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-slate-300">Upselling Growth via UI/UX</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="py-20 lg:py-24 bg-brandBg"> 
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> 
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center"> 
+        <!-- LEFT --> 
+        <div class="lg:col-span-4"> 
+          <div class="flex items-center gap-3 mb-4"> 
+            <span class="w-8 h-px bg-gold"></span> 
+            <span class="text-xs font-bold tracking-[0.2em] uppercase text-gold-dark"> Overview </span> 
+          </div> 
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-navy leading-tight"> Dedicated to<br> <span class="text-gold-dark"> Seamless Web Operations. </span> </h2> 
+        </div> 
+        <!-- RIGHT --> 
+        <div class="lg:col-span-8"> 
+          <p class="text-base sm:text-lg text-bodyDark leading-relaxed">
+            Marketing professional with nearly <strong class="text-navy">3 years of hands-on experience</strong> managing website content, SEO, and digital presentation for service-booking and multi-brand websites. Experienced in updating content, visuals, and promotions via CMS, designing banners in Canva, applying on-page SEO, testing booking flows/forms, and coordinating smoothly with partners and technical teams. Detail-oriented with a strong sense of aesthetics, committed to information accuracy and maintaining optimal website performance.
+          </p> 
+          <!-- Skill tags --> 
+          <div class="mt-7 flex flex-wrap gap-2"> 
+            <span class="px-4 py-2 rounded-full bg-white border border-brandBorder text-xs font-bold text-navy"> CMS Management </span> 
+            <span class="px-4 py-2 rounded-full bg-white border border-brandBorder text-xs font-bold text-navy"> On-Page & Local SEO </span> 
+            <span class="px-4 py-2 rounded-full bg-white border border-brandBorder text-xs font-bold text-navy"> Website Testing & Bug Reporting </span> 
+            <span class="px-4 py-2 rounded-full bg-white border border-brandBorder text-xs font-bold text-navy"> Banner Design & Visual Assets </span> 
+            <span class="px-4 py-2 rounded-full bg-white border border-brandBorder text-xs font-bold text-navy"> Dev Team Coordination </span> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS / QUALIFICATIONS -->
+  <section id="skills" class="py-20 lg:py-24 bg-brandBg border-y border-brandBorder/60">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <!-- HEADER -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-8 h-px bg-gold"></span>
+          <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-gold-dark">Capabilities</span>
+        </div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-navy">Core Competencies & Toolsets</h2>
+        <p class="mt-3 text-sm text-bodyDark max-w-xl">Combining structured CMS management, SEO optimization, website testing, and creative visual design.</p>
+      </div>
+
+      <!-- TOP — CORE EXPERTISE + TOOLS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+        <!-- CORE EXPERTISE -->
+        <div class="lg:col-span-8 bg-white rounded-2xl border border-brandBorder p-7 lg:p-8">
+          <div class="flex items-center justify-between mb-7">
+            <h3 class="font-serif text-xl font-bold text-navy">Core Competencies</h3>
+            <span class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400">Website Admin Scope</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-7">
+            <div class="group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-navy/5 text-navy flex items-center justify-center group-hover:bg-navy group-hover:text-gold transition-all duration-300">
+                  <i class="fa-solid fa-globe text-sm"></i>
+                </div>
+                <span class="text-sm font-bold text-navy">CMS Content Management</span>
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-navy/5 text-navy flex items-center justify-center group-hover:bg-navy group-hover:text-gold transition-all duration-300">
+                  <i class="fa-solid fa-magnifying-glass-chart text-sm"></i>
+                </div>
+                <span class="text-sm font-bold text-navy">On-page & Local SEO</span>
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-navy/5 text-navy flex items-center justify-center group-hover:bg-navy group-hover:text-gold transition-all duration-300">
+                  <i class="fa-solid fa-image text-sm"></i>
+                </div>
+                <span class="text-sm font-bold text-navy">Image Retouch & Banner Design</span>
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-navy/5 text-navy flex items-center justify-center group-hover:bg-navy group-hover:text-gold transition-all duration-300">
+                  <i class="fa-solid fa-pen-nib text-sm"></i>
+                </div>
+                <span class="text-sm font-bold text-navy">Content Editing & Presentation</span>
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-navy/5 text-navy flex items-center justify-center group-hover:bg-navy group-hover:text-gold transition-all duration-300">
+                  <i class="fa-solid fa-clipboard-check text-sm"></i>
+                </div>
+                <span class="text-sm font-bold text-navy">Website Testing & Bug Reporting</span>
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-navy/5 text-navy flex items-center justify-center group-hover:bg-navy group-hover:text-gold transition-all duration-300">
+                  <i class="fa-solid fa-handshake text-sm"></i>
+                </div>
+                <span class="text-sm font-bold text-navy">Coordination with Technical Teams</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-brandBorder">
+            <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-3">Key Skills</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-full bg-brandCard text-navy text-[10px] font-semibold">Content Publishing</span>
+              <span class="px-3 py-1.5 rounded-full bg-brandCard text-navy text-[10px] font-semibold">Pricing & Promo Updates</span>
+              <span class="px-3 py-1.5 rounded-full bg-brandCard text-navy text-[10px] font-semibold">Booking Flow Testing</span>
+              <span class="px-3 py-1.5 rounded-full bg-brandCard text-navy text-[10px] font-semibold">Internal Linking & Meta Tags</span>
+              <span class="px-3 py-1.5 rounded-full bg-brandCard text-navy text-[10px] font-semibold">Broken Link Verification</span>
+              <span class="px-3 py-1.5 rounded-full bg-brandCard text-navy text-[10px] font-semibold">UI/UX & CRO Proposal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOOLS & LANGUAGES -->
+        <div class="lg:col-span-4 bg-navy rounded-2xl p-7 lg:p-8 text-white">
+          <div class="flex items-center gap-3 mb-7">
+            <div class="w-9 h-9 rounded-lg bg-white/10 text-gold flex items-center justify-center">
+              <i class="fa-solid fa-screwdriver-wrench text-sm"></i>
+            </div>
+            <h3 class="font-serif text-xl font-bold">Tools & Software</h3>
+          </div>
+
+          <div class="flex flex-wrap gap-2.5">
+            <span class="px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs font-medium">WordPress CMS</span>
+            <span class="px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs font-medium">Custom CMS</span>
+            <span class="px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs font-medium">Google Analytics</span>
+            <span class="px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs font-medium">Looker Studio</span>
+            <span class="px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs font-medium">Canva</span>
+            <span class="px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs font-medium">CapCut</span>
+            <span class="px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs font-medium">SEO Tools</span>
+            <span class="px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs font-medium">Google Search Console</span>
+          </div>
+
+          <div class="mt-10 pt-6 border-t border-white/10">
+            <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-4">Languages</p>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm">English</span>
+                <span class="text-[10px] text-gold-accent uppercase tracking-wider">Intermediate · B1</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm">Chinese</span>
+                <span class="text-[10px] text-gold-accent uppercase tracking-wider">Elementary · HSK 1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM — EDUCATION + CERTIFICATIONS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- EDUCATION -->
+        <div class="lg:col-span-5 bg-white rounded-2xl border border-brandBorder p-7">
+          <div class="flex items-center gap-3 mb-7">
+            <div class="w-9 h-9 rounded-lg bg-gold/10 text-gold-dark flex items-center justify-center">
+              <i class="fa-solid fa-graduation-cap text-sm"></i>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-navy">Education</h3>
+          </div>
+
+          <div class="relative pl-5 border-l border-gold/40">
+            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-gold"></div>
+            <p class="text-[10px] font-bold tracking-[0.14em] uppercase text-gold-dark">2020 — 2024</p>
+            <h4 class="mt-2 font-bold text-navy text-base">University of Economics – Da Nang</h4>
+            <p class="mt-1 text-xs text-bodyDark">Bachelor of Business Administration (Marketing)</p>
+            <div class="mt-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/10 border border-gold/20">
+              <span class="text-[10px] uppercase tracking-wider text-slate-500">GPA</span>
+              <span class="text-xs font-bold text-navy">3.34 / 4.0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-brandBorder p-7">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-gold/10 text-gold-dark flex items-center justify-center">
+                <i class="fa-solid fa-certificate text-sm"></i>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-navy">Certifications</h3>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400">04 Credentials</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="p-4 rounded-xl bg-brandCard border border-brandBorder">
+              <h4 class="text-sm font-bold text-navy">SEO Training Program</h4>
+              <p class="text-[10px] text-slate-500 mt-1">VinhLink Academy</p>
+            </div>
+            <div class="p-4 rounded-xl bg-brandCard border border-brandBorder">
+              <h4 class="text-sm font-bold text-navy">Content & Digital Marketing</h4>
+              <p class="text-[10px] text-slate-500 mt-1">HubSpot Academy</p>
+            </div>
+            <div class="p-4 rounded-xl bg-brandCard border border-brandBorder">
+              <h4 class="text-sm font-bold text-navy">Brand Marketing</h4>
+              <p class="text-[10px] text-slate-500 mt-1">Tomorrow Together</p>
+            </div>
+            <div class="p-4 rounded-xl bg-brandCard border border-brandBorder">
+              <h4 class="text-sm font-bold text-navy">PR & Communication Skills</h4>
+              <p class="text-[10px] text-slate-500 mt-1">AIM Academy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL EXPERIENCE -->
+  <section id="experience" class="py-20 lg:py-24 bg-brandBg">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
+      <!-- SECTION HEADER -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-8 h-px bg-gold"></span>
+          <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-gold-dark">Career Journey</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-navy">Practical Website Administration Experience</h2>
+          <p class="text-xs text-bodyDark max-w-xs leading-relaxed">Nearly 3 years managing service-booking & multi-brand websites.</p>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE LIST -->
+      <div class="space-y-0">
+        <!-- EXPERIENCE 01 -->
+        <div class="group grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 py-8 border-t border-brandBorder">
+          <div class="md:col-span-2">
+            <span class="text-[10px] font-bold tracking-[0.15em] uppercase text-gold-dark">08/2025 — Present</span>
+          </div>
+          <div class="md:col-span-4">
+            <h3 class="font-serif text-xl font-bold text-navy group-hover:text-gold-dark transition-colors">HERBAL SPA & WELLNESS CENTER</h3>
+            <p class="mt-1 text-xs font-semibold text-gold-dark">Marketing Lead | Website • Content • SEO • Branding</p>
+          </div>
+          <div class="md:col-span-6">
+            <ul class="list-disc list-outside pl-4 text-xs text-bodyDark space-y-2 leading-relaxed">
+              <li>Managed the website and integrated online booking system for 5 branches, overseeing service info, pricing, promotions, and CMS updates, supporting <strong>1,500 bookings/month</strong>.</li>
+              <li>Contributed to website redesign and UI/UX optimization, improving navigation and booking convenience, contributing to a <strong>25% increase in upselling</strong>.</li>
+              <li>Tested website functions end-to-end (search, booking flows, contact forms, links) and coordinated with developers to resolve bugs.</li>
+              <li>Created visual assets and banners using Canva/AI tools; tracked traffic via Google Analytics & Looker Studio.</li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-full bg-navy/5 text-[10px] font-bold text-navy">1,500 Bookings/mo</span>
+              <span class="px-3 py-1.5 rounded-full bg-gold/10 text-[10px] font-bold text-gold-dark">+25% Upselling</span>
+              <span class="px-3 py-1.5 rounded-full bg-navy/5 text-[10px] font-bold text-navy">Website QA & Dev Sync</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 02 -->
+        <div class="group grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 py-8 border-t border-brandBorder">
+          <div class="md:col-span-2">
+            <span class="text-[10px] font-bold tracking-[0.15em] uppercase text-gold-dark">01/2024 — 07/2025</span>
+          </div>
+          <div class="md:col-span-4">
+            <h3 class="font-serif text-xl font-bold text-navy group-hover:text-gold-dark transition-colors">TOS (TopOnSeek) Agency</h3>
+            <p class="mt-1 text-xs font-semibold text-gold-dark">SEO Content Specialist</p>
+          </div>
+          <div class="md:col-span-6">
+            <ul class="list-disc list-outside pl-4 text-xs text-bodyDark space-y-2 leading-relaxed">
+              <li>Managed website content across multiple brand sites (CeraVe, Vĩnh Tường, Come Home, HDBank) via CMS, ensuring accurate text, images, and links.</li>
+              <li>Built demo & campaign pages based on client briefs; proposed UI/UX and CRO improvements to enhance conversion.</li>
+              <li>Published SEO content and optimized on-page elements (titles, meta descriptions, internal links, image alt). Supported campaigns reaching <strong>1M+ clicks and 20M+ impressions</strong>.</li>
+              <li>Audited website content and technical issues, coordinating with client tech teams for swift resolution.</li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-full bg-navy/5 text-[10px] font-bold text-navy">Multi-brand CMS</span>
+              <span class="px-3 py-1.5 rounded-full bg-gold/10 text-[10px] font-bold text-gold-dark">1M+ Organic Clicks</span>
+              <span class="px-3 py-1.5 rounded-full bg-navy/5 text-[10px] font-bold text-navy">CRO & Technical Audit</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 03 -->
+        <div class="group grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 py-8 border-t border-b border-brandBorder">
+          <div class="md:col-span-2">
+            <span class="text-[10px] font-bold tracking-[0.15em] uppercase text-gold-dark">06/2023 — 09/2023</span>
+          </div>
+          <div class="md:col-span-4">
+            <h3 class="font-serif text-xl font-bold text-navy group-hover:text-gold-dark transition-colors">BAOVIET Holdings</h3>
+            <p class="mt-1 text-xs font-semibold text-gold-dark">Marketing & Events Intern</p>
+          </div>
+          <div class="md:col-span-6">
+            <ul class="list-disc list-outside pl-4 text-xs text-bodyDark space-y-2 leading-relaxed">
+              <li>Posted and updated content and images accurately on the company website and Facebook page on schedule.</li>
+              <li>Prepared and organized digital content materials and supported corporate event documentation.</li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-full bg-navy/5 text-[10px] font-bold text-navy">Website Content Upload</span>
+              <span class="px-3 py-1.5 rounded-full bg-navy/5 text-[10px] font-bold text-navy">Digital Asset Management</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSITION TO SELECTED WORK -->
+      <div class="mt-10 flex items-center justify-between">
+        <p class="text-[10px] uppercase tracking-[0.18em] text-slate-400">Selected Projects</p>
+        <a href="#projects" class="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-navy hover:text-gold-dark transition-colors">
+          Explore Website Admin Projects
+          <i class="fa-solid fa-arrow-right text-[9px] group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK / PROJECTS -->
+  <section id="projects" class="featured-work">
+    <div class="featured-container">
+      <div class="featured-header">
+        <div>
+          <span class="featured-eyebrow">Key Projects</span>
+          <h2>Featured Web Case Studies</h2>
+        </div>
+        <p>A selection of website management, CMS publishing, UI/UX optimization, and technical coordination projects.</p>
+      </div>
+
+      <div class="featured-grid">
+        <!-- 01 — HERBAL SPA -->
+        <article class="featured-card" onclick="openCaseStudy('herbal')">
+          <div class="featured-image">
+            <img src="interior-space-of-Herbal-Spa-Hoi-An-Branch 1 (4).jpg" alt="Herbal Spa website admin case study">
+            <div class="image-overlay"></div>
+            <span class="case-number">01</span>
+            <span class="case-category">CMS · BOOKING UX · SEO</span>
+          </div>
+          <div class="featured-info">
+            <span class="info-label">herbalspa.vn (5 Branches)</span>
+            <h3>Herbal Spa Website Management</h3>
+            <div class="featured-meta">
+              <div>
+                <small>ROLE</small>
+                <strong>Website Admin & Marketing Lead</strong>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 — CERAVE + VINH TUONG + COME HOME -->
+        <article class="featured-card tos-card" onclick="openCaseStudy('tos')">
+          <div class="client-images">
+            <div class="client-image">
+              <img src="unnamed (2).png" alt="CeraVe CMS management case study">
+              <div class="image-overlay"></div>
+              <div class="client-name">
+                <strong>CeraVe</strong>
+              </div>
+            </div>
+            <div class="client-image">
+              <img src="360 Years of Innovation.jpg" alt="Vĩnh Tường website admin case study">
+              <div class="image-overlay"></div>
+              <div class="client-name" style="transform: translateY(-10px);">
+                <strong>Vĩnh Tường</strong>
+              </div>
+            </div>
+            <span class="case-number">02</span>
+            <span class="case-category">MULTI-BRAND CMS · ON-PAGE SEO</span>
+          </div>
+          <div class="featured-info">
+            <span class="info-label">TOS Agency Client Websites</span>
+            <h3>Multi-Brand CMS Publishing</h3>
+            <div class="featured-meta">
+              <div>
+                <small>ROLE</small>
+                <strong>SEO Content Specialist</strong>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 — BAO VIET -->
+        <article class="featured-card" onclick="openCaseStudy('baoviet')">
+          <div class="featured-image">
+            <img src="history-img-10.jpg" alt="Bao Viet website admin case study">
+            <div class="image-overlay"></div>
+            <span class="case-number">03</span>
+            <span class="case-category">CORPORATE CMS · CONTENT</span>
+          </div>
+          <div class="featured-info">
+            <span class="info-label">Bảo Việt Holdings</span>
+            <h3>Corporate Website Operations</h3>
+            <div class="featured-meta">
+              <div>
+                <small>ROLE</small>
+                <strong>Marketing & Events Intern</strong>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="py-20 bg-navy text-white relative overflow-hidden">
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Contact Info -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="space-y-3">
+            <h2 class="text-xs font-bold tracking-widest text-gold-accent uppercase">Let's Connect</h2>
+            <h3 class="font-serif text-3xl sm:text-4xl font-bold">Get In Touch</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Open to Website Administrator, Content Management, and SEO/Digital Operations roles. Feel free to contact me directly via email or phone.
+            </p>
+          </div>
+
+          <div class="space-y-4 pt-2">
+            <a href="tel:0906516326" class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+              <div class="w-10 h-10 rounded-full bg-gold/20 text-gold-accent flex items-center justify-center text-lg flex-shrink-0">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <div class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Phone</div>
+                <div class="text-xs sm:text-sm font-semibold">0906 516 326</div>
+              </div>
+            </a>
+
+            <a href="mailto:tramltb.942@gmail.com" class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+              <div class="w-10 h-10 rounded-full bg-gold/20 text-gold-accent flex items-center justify-center text-lg flex-shrink-0">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <div class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Email</div>
+                <div class="text-xs sm:text-sm font-semibold">tramltb.942@gmail.com</div>
+              </div>
+            </a>
+
+            <a href="https://linkedin.com/in/tram-emma/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+              <div class="w-10 h-10 rounded-full bg-gold/20 text-gold-accent flex items-center justify-center text-lg flex-shrink-0">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </div>
+              <div>
+                <div class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">LinkedIn</div>
+                <div class="text-xs sm:text-sm font-semibold">linkedin.com/in/tram-emma/</div>
+              </div>
+            </a>
+
+            <a href="https://tram-portfolio.github.io/websiteadmin/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+              <div class="w-10 h-10 rounded-full bg-gold/20 text-gold-accent flex items-center justify-center text-lg flex-shrink-0">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+              <div>
+                <div class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Live Portfolio</div>
+                <div class="text-xs sm:text-sm font-semibold">tram-portfolio.github.io/websiteadmin/</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="lg:col-span-7">
+          <form id="contactForm" onsubmit="handleFormSubmit(event)" class="bg-white/5 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/10 space-y-4">
+            <h4 class="font-serif text-2xl font-bold mb-2 text-gold-accent">Send a Message</h4>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Your Name *</label>
+                <input type="text" id="name" name="name" required placeholder="e.g. Recruiter Name" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-gold-accent text-xs">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Your Email *</label>
+                <input type="email" id="email" name="email" required placeholder="e.g. hr@company.com" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-gold-accent text-xs">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Website Administrator Opportunity" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-gold-accent text-xs">
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1">Message *</label>
+              <textarea rows="4" id="message" name="message" required placeholder="Write your message here..." class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:border-gold-accent text-xs"></textarea>
+            </div>
+
+            <button type="submit" id="submitButton" class="w-full py-3.5 rounded-xl bg-gold hover:bg-gold-accent text-navy font-bold uppercase tracking-wider text-xs transition duration-300 shadow-lg flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Send Message</span>
+            </button>
+
+            <div id="formSuccessMessage" class="hidden p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 text-xs text-center font-medium">
+              Message sent successfully. Thank you for reaching out!
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy-dark text-slate-400 py-8 border-t border-white/10 text-xs text-center">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>© 2026 Le Tran Bao Tram — Website Administrator. All rights reserved.</div>
+      <div class="flex items-center gap-4 text-slate-300">
+        <a href="mailto:tramltb.942@gmail.com" class="hover:text-gold"><i class="fa-solid fa-envelope text-base"></i></a>
+        <a href="https://linkedin.com/in/tram-emma/" target="_blank" class="hover:text-gold"><i class="fa-brands fa-linkedin text-base"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CASE STUDY MODAL -->
+  <div id="caseStudyModal" class="case-modal" aria-hidden="true">
+    <div class="case-modal-inner">
+      <button type="button" class="case-modal-close" onclick="closeCaseStudy()" aria-label="Close case study">×</button>
+      <div id="caseStudyContent"></div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+  /* MOBILE MENU TOGGLE */
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  /* FORM SUBMIT HANDLER */
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('contactForm');
+    const successMsg = document.getElementById('formSuccessMessage');
+    const submitButton = document.getElementById('submitButton');
+
+    const data = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      subject: document.getElementById('subject').value,
+      message: document.getElementById('message').value
+    };
+
+    submitButton.disabled = true;
+    submitButton.querySelector('span').textContent = 'Sending...';
+
+    try {
+      const response = await fetch(
+        'https://script.google.com/macros/s/AKfycbyh3XXg65sU6nh5kNm62jpOyW3URHRPiLVnjOGQY3aKXVFvznv0wVYyKGnO653AZShV/exec',
+        {
+          method: 'POST',
+          body: JSON.stringify(data)
+        }
+      );
+
+      if (!response.ok) throw new Error('Failed to send message');
+
+      form.reset();
+      successMsg.textContent = 'Message sent successfully. Thank you for reaching out!';
+      successMsg.classList.remove('hidden');
+      submitButton.querySelector('span').textContent = 'Message Sent';
+
+    } catch (error) {
+      console.error(error);
+      successMsg.textContent = 'Something went wrong. Please try again later.';
+      successMsg.classList.remove('hidden');
+      submitButton.querySelector('span').textContent = 'Send Message';
+    } finally {
+      submitButton.disabled = false;
+    }
+  }
+
+  /* CASE STUDY DATA & MODAL (WEBSITE ADMIN FOCUS) */
+  const modalData = {
+    herbal: {
+      category: "Website Admin · CMS · Booking UX",
+      title: "HERBAL SPA — Website Management & Booking Optimization",
+      role: "Website Admin & Marketing Lead",
+      period: "08/2025 – Present",
+      html: `
+      <div class="px-6 py-8">
+        <span class="text-xs font-bold uppercase tracking-widest text-gold">Herbal Spa & Wellness Center</span>
+        <h2 class="font-serif text-3xl font-bold text-navy mt-1">Website Administration & Booking System Optimization</h2>
+        <p class="text-xs text-slate-500 mt-2">Managing 5 branch websites (herbalspa.vn), supporting 1,500+ online bookings per month.</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
+          <div class="bg-brandBg p-4 rounded-xl text-center">
+            <div class="font-serif text-2xl font-bold text-navy">1,500+</div>
+            <div class="text-[10px] uppercase text-slate-500 mt-1">Monthly Website Bookings</div>
+          </div>
+          <div class="bg-brandBg p-4 rounded-xl text-center">
+            <div class="font-serif text-2xl font-bold text-navy">5</div>
+            <div class="text-[10px] uppercase text-slate-500 mt-1">Spa Branches Managed</div>
+          </div>
+          <div class="bg-brandBg p-4 rounded-xl text-center">
+            <div class="font-serif text-2xl font-bold text-navy">+25%</div>
+            <div class="text-[10px] uppercase text-slate-500 mt-1">Upselling via UI/UX Revamp</div>
+          </div>
+          <div class="bg-brandBg p-4 rounded-xl text-center">
+            <div class="font-serif text-2xl font-bold text-navy">100%</div>
+            <div class="text-[10px] uppercase text-slate-500 mt-1">CMS & Price Sync</div>
+          </div>
+        </div>
+
+        <div class="space-y-4 text-xs text-bodyDark leading-relaxed">
+          <h3 class="font-serif text-lg font-bold text-navy border-b border-brandBorder pb-1">Key Responsibilities & Achievements:</h3>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>CMS & Service Updates:</strong> Continuously updated service info, menu items, multi-language content, pricing, and promotional banners via CMS across 5 branch sites.</li>
+            <li><strong>UI/UX & Booking Flow Optimization:</strong> Coordinated website redesign and new feature rollouts; improved mobile booking UX and service navigation, resulting in a 25% increase in upselling.</li>
+            <li><strong>End-to-End Testing & Bug Reporting:</strong> Routinely tested forms, search flows, booking funnels, and broken links across desktop & mobile; worked with the tech team to verify bug fixes.</li>
+            <li><strong>On-Page & Local SEO:</strong> Optimized title tags, meta descriptions, alt texts, and Google Business Profile linkages for all spa locations.</li>
+            <li><strong>Web Performance Tracking:</strong> Monitored user sessions, conversion funnels, and traffic sources using Google Analytics & Looker Studio.</li>
+          </ul>
+        </div>
+      </div>
+      `
+    },
+    tos: {
+      category: "CMS Content Publishing · On-Page SEO",
+      title: "TOS AGENCY — Multi-Brand CMS & Web Content Management",
+      role: "SEO Content Specialist",
+      period: "01/2024 – 07/2025",
+      html: `
+      <div class="px-6 py-8">
+        <span class="text-xs font-bold uppercase tracking-widest text-gold">TOS (TopOnSeek) Agency</span>
+        <h2 class="font-serif text-3xl font-bold text-navy mt-1">Multi-Brand CMS Publishing & Web Optimization</h2>
+        <p class="text-xs text-slate-500 mt-2">Managing CMS content for major enterprise clients including CeraVe, Vĩnh Tường, Come Home, and HDBank.</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 my-6">
+          <div class="bg-brandBg p-4 rounded-xl text-center">
+            <div class="font-serif text-2xl font-bold text-navy">1M+</div>
+            <div class="text-[10px] uppercase text-slate-500 mt-1">Organic Clicks Generated</div>
+          </div>
+          <div class="bg-brandBg p-4 rounded-xl text-center">
+            <div class="font-serif text-2xl font-bold text-navy">20M+</div>
+            <div class="text-[10px] uppercase text-slate-500 mt-1">Total Impressions</div>
+          </div>
+          <div class="bg-brandBg p-4 rounded-xl text-center">
+            <div class="font-serif text-2xl font-bold text-navy">4+</div>
+            <div class="text-[10px] uppercase text-slate-500 mt-1">Enterprise CMS Sites</div>
+          </div>
+        </div>
+
+        <div class="space-y-4 text-xs text-bodyDark leading-relaxed">
+          <h3 class="font-serif text-lg font-bold text-navy border-b border-brandBorder pb-1">Scope of Work:</h3>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>CMS Operations:</strong> Published and formatted product pages, landing pages, articles, and announcements across varied CMS platforms (WordPress, Custom Enterprise CMS).</li>
+            <li><strong>On-Page SEO Execution:</strong> Configured page titles, meta descriptions, clean URLs, heading structures, internal linking, and image optimization.</li>
+            <li><strong>Demo & Campaign Page Construction:</strong> Built demo pages and promotional landing layouts based on client design briefs.</li>
+            <li><strong>Technical & Content Audits:</strong> Audited content errors, broken links, formatting issues, and keyword ranking changes, working directly with client tech/marketing teams to fix errors.</li>
+          </ul>
+        </div>
+      </div>
+      `
+    },
+    baoviet: {
+      category: "Corporate Web Content · Media Updates",
+      title: "BAOVIET HOLDINGS — Corporate Website Operations",
+      role: "Marketing & Events Intern",
+      period: "06/2023 – 09/2023",
+      html: `
+      <div class="px-6 py-8">
+        <span class="text-xs font-bold uppercase tracking-widest text-gold">BAOVIET Holdings</span>
+        <h2 class="font-serif text-3xl font-bold text-navy mt-1">Corporate Website & Media Content Updates</h2>
+        <p class="text-xs text-slate-500 mt-2">Managing corporate news, imagery, and event updates on the official website.</p>
+        
+        <div class="space-y-4 text-xs text-bodyDark leading-relaxed my-6">
+          <h3 class="font-serif text-lg font-bold text-navy border-b border-brandBorder pb-1">Key Contributions:</h3>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>Posted and updated corporate announcements, press news, and visual assets on the official website and digital channels strictly on schedule.</li>
+            <li>Verified image quality, formatting, and link integrity prior to publication.</li>
+            <li>Supported digital archiving and event material organization for internal and external communications.</li>
+          </ul>
+        </div>
+      </div>
+      `
+    }
+  };
+
+  /* MODAL OPEN / CLOSE FUNCTIONS */
+  function openCaseStudy(projectId) {
+    const modal = document.getElementById("caseStudyModal");
+    const content = document.getElementById("caseStudyContent");
+    if (!modal || !content) return;
+    
+    const data = modalData[projectId];
+    if (!data) return;
+
+    content.innerHTML = data.html;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeCaseStudy() {
+    const modal = document.getElementById("caseStudyModal");
+    if (!modal) return;
+    
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  window.addEventListener('click', (e) => {
+    const modal = document.getElementById("caseStudyModal");
+    if (e.target === modal) closeCaseStudy();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCaseStudy();
+  });
+  </script>
+</body>
+</html>
