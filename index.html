@@ -952,18 +952,51 @@ herbal: {
 </ul>
 
           <!-- HOMEPAGE: BEFORE & AFTER -->
-        <div class="mt-5">
+      <div class="mt-5">
   <p class="text-[10px] font-bold uppercase tracking-widest text-gold mb-3">01A · Homepage Redesign</p>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-<div class="rounded-xl overflow-hidden border border-brandBorder">
-  <img src="hpcu.png" alt="Herbal Spa Previous Homepage" class="w-full aspect-[4/3] object-cover" />
-  <div class="p-3">
-    <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Before</span>
-    <p class="font-bold text-navy mt-1">Previous Homepage</p>
-    <p class="text-[10px] text-slate-500 mt-1">Original layout and content hierarchy</p>
+    <div class="rounded-xl overflow-hidden border border-brandBorder">
+      <button type="button" onclick="openImage('hpcu.png')" class="block w-full text-left cursor-zoom-in" aria-label="View full previous homepage screenshot">
+        <div class="h-64 overflow-hidden bg-white relative">
+          <img src="hpcu.png" alt="Herbal Spa Previous Homepage" class="w-full object-cover object-top" />
+          <span class="absolute bottom-3 right-3 bg-black/70 text-white text-[10px] px-3 py-1 rounded-full">Click to view full image ↗</span>
+        </div>
+      </button>
+      <div class="p-3">
+        <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Before</span>
+        <p class="font-bold text-navy mt-1">Previous Homepage</p>
+        <p class="text-[10px] text-slate-500 mt-1">Original layout and content hierarchy</p>
+      </div>
+    </div>
+
   </div>
 </div>
+
+<div id="imageModal" class="fixed inset-0 z-[9999] hidden bg-black/90 p-4 md:p-8" onclick="closeImage()">
+  <button type="button" class="fixed top-4 right-5 text-white text-3xl z-[10000]" onclick="closeImage()" aria-label="Close image">&times;</button>
+  <div class="w-full h-full overflow-auto flex justify-center" onclick="event.stopPropagation()">
+    <img id="fullImage" src="" alt="Full homepage screenshot" class="h-auto max-w-full object-contain object-top self-start" />
+  </div>
+</div>
+
+<script>
+  function openImage(src) {
+    document.getElementById('fullImage').src = src;
+    document.getElementById('imageModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImage() {
+    document.getElementById('imageModal').classList.add('hidden');
+    document.getElementById('fullImage').src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') closeImage();
+  });
+</script>
 
               <div class="rounded-xl overflow-hidden border border-brandBorder">
                 <!-- REPLACE WITH NEW HOMEPAGE IMAGE -->
