@@ -2249,15 +2249,17 @@ comehome: {
     </div>
   `
 };
-function openHomepageLightbox(imageSrc) {
-  const lightbox = document.getElementById('homepageLightbox');
-  const image = document.getElementById('homepageLightboxImage');
+/* Đưa hàm openHomepageLightbox ra ngoài object để cú pháp chuẩn xác */
+  function openHomepageLightbox(imageSrc) {
+    const lightbox = document.getElementById('homepageLightbox');
+    const image = document.getElementById('homepageLightboxImage');
 
-  if (!lightbox || !image) return;
+    if (!lightbox || !image) return;
 
-  image.src = imageSrc;
-  lightbox.classList.remove('hidden');
-}
+    image.src = imageSrc;
+    lightbox.classList.remove('hidden');
+  }
+
   /* MODAL OPEN / CLOSE FUNCTIONS */
   function openCaseStudy(projectId) {
     const modal = document.getElementById("caseStudyModal");
@@ -2282,47 +2284,28 @@ function openHomepageLightbox(imageSrc) {
     document.body.style.overflow = "";
   }
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    const lightbox = document.getElementById('homepageLightbox');
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const lightbox = document.getElementById('homepageLightbox');
 
-    if (lightbox && !lightbox.classList.contains('hidden')) {
-      lightbox.classList.add('hidden');
-      return;
+      if (lightbox && !lightbox.classList.contains('hidden')) {
+        lightbox.classList.add('hidden');
+        return;
+      }
+
+      closeCaseStudy();
     }
-
-    closeCaseStudy();
-  }
-});
+  });
   </script>
   
-<!-- Shared Homepage Lightbox -->
-<div
-  id="homepageLightbox"
-  class="hidden fixed inset-0 z-[9999] bg-black/85 p-4 md:p-8"
-  onclick="if(event.target === this) this.classList.add('hidden')"
->
-  <div class="relative mx-auto max-w-5xl h-full flex flex-col">
-
-    <button
-      type="button"
-      onclick="document.getElementById('homepageLightbox').classList.add('hidden')"
-      class="absolute top-3 right-3 z-10 bg-white text-navy w-10 h-10 rounded-full shadow-lg text-xl font-bold hover:bg-slate-100"
-      aria-label="Close image"
-    >
-      &times;
-    </button>
-
-    <div class="overflow-y-auto rounded-xl bg-white h-full">
-      <img
-        id="homepageLightboxImage"
-        src=""
-        alt="Full Homepage Screenshot"
-        class="block w-full h-auto"
-      />
+  <!-- Shared Homepage Lightbox -->
+  <div id="homepageLightbox" class="hidden fixed inset-0 z-[9999] bg-black/85 p-4 md:p-8" onclick="if(event.target === this) this.classList.add('hidden')">
+    <div class="relative mx-auto max-w-5xl h-full flex flex-col">
+      <button type="button" onclick="document.getElementById('homepageLightbox').classList.add('hidden')" class="absolute top-3 right-3 z-10 bg-white text-navy w-10 h-10 rounded-full shadow-lg text-xl font-bold hover:bg-slate-100" aria-label="Close image">&times;</button>
+      <div class="overflow-y-auto rounded-xl bg-white h-full">
+        <img id="homepageLightboxImage" src="" alt="Full Homepage Screenshot" class="block w-full h-auto"/>
+      </div>
     </div>
-
   </div>
-</div>
 </body>
 </html>
